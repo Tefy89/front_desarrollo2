@@ -1,6 +1,8 @@
 <div class="grid">
     <div class="col-12">
         <div class="card px-6 py-6">
+            <p-dropdown [options]="categorias" optionLabel="name" [showClear]="true"
+                placeholder="Filtrar por categorias" />
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
                     <div class="my-2">
@@ -71,8 +73,8 @@
                             {{product.stock}}
                         </td>
                         <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Acciones</span>
-                            <span
-                                [class]="'product-badge status-' + (product.inventoryStatus ? product.inventoryStatus.toLowerCase() : '')">{{product.estado}}</span>
+                            <!-- <span
+                                [class]="'product-badge status-' + (product.inventoryStatus ? product.inventoryStatus.toLowerCase() : '')">{{product.estado}}</span>-->
                         </td>
                         <td>
                             <div class="flex">
