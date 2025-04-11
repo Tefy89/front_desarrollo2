@@ -1,11 +1,18 @@
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideHttpClient, withFetch } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, platformBrowser, provideClientHydration } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { peticionInterceptor } from './admin/interceptors/peticion.interceptor';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideHttpClient(withFetch()),importProvidersFrom(BrowserModule),importProvidersFrom(BrowserAnimationsModule)]
+  providers: [provideRouter(routes),
+  provideHttpClient(withFetch(), withInterceptorsFromDi()),
+  { provide: HTTP_INTERCEPTORS, useClass: peticionInterceptor, multi: true },
+  provideClientHydration(),
+  importProvidersFrom(BrowserModule),
+  importProvidersFrom(BrowserAnimationsModule)]
+  //validar si  se debe importar provideClientHydration
 };
