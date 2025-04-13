@@ -9,10 +9,13 @@ export class peticionInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, handler: HttpHandler): Observable<HttpEvent<any>> {
     console.log('Request URL' + req.url)
 
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhdWwucGFlekBvdXRsb29rLmNvbSIsImlkIjoxLCJpYXQiOjE3NDQ1MTc5MzgsImV4cCI6MTc0NDUxODgxOH0.ME5qSb110cf-lQl0bolPzm2RdJuVSQbFdxjWZajONo4"
+
     let peticion = req.clone({
       setHeaders: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhdWwucGFlekBvdXRsb29rLmNvbSIsImlkIjoxLCJpYXQiOjE3NDQzMzUzOTIsImV4cCI6MTc0NDMzNjI3Mn0.bTN_DU9679jTGyg7GQk1NGqHkmCDc_mHqE3hheN3_wQ'
+        'Authorization': 'Bearer ' + token
+
       }//aumentar la e para el token
     })
     return handler.handle(peticion).pipe(tap(() => { },

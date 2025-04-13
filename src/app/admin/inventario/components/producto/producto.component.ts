@@ -8,6 +8,10 @@ import { ProductoService } from '../../services/producto.service';
 })
 export class ProductoComponent {
   private productoService = inject(ProductoService)
+  loading: boolean = false;
+  totalRecords!: number;
+  buscador: string = ''
+
   categorias: any = [
     { name: 'Ropa Dama', code: 'RD' },
     { name: 'Ropa Caballero', code: 'RC' },
@@ -26,6 +30,29 @@ export class ProductoComponent {
     )
   }
 
+  loadProductos(event: any) {
+    //this.loading = true
+    let page = (event.first / event.rows)
+    this.listar(page, event.rows)
+    console.log(event)
+  }
+
+  listar(page = 1, limit = 10) {
+    this.productoService.funListar(page, limit, this.buscador).subscribe(
+      (res: any) => {
+        this.products = res.data;
+        this.totalRecords = res.total;
+        this.loading = false;
+      }
+    )
+  }
+
+  buscar(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.listar()
+    } else if (this.buscador == "")
+      this.listar()
+  }
   openNew() {
 
   }
