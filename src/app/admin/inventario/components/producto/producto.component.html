@@ -80,6 +80,8 @@
                         </td>
                         <td>
                             <div class="flex">
+                                <p-button (click)="openDialogImagen(product.id)" icon="pi pi-image"
+                                    class="p-button-rounded p-button-succes mr-2"></p-button>
                                 <button pButton pRipple icon="pi pi-pencil"
                                     class="p-button-rounded p-button-success mr-2"
                                     (click)="editProduct(product)"></button>
@@ -93,3 +95,19 @@
         </div>
     </div>
 </div>
+
+
+<p-dialog header="Header" [(visible)]="visible" [modal]="true" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+    <h2>Id Producto: {{producto_id}}</h2>
+    <p-fileUpload name="demo[]" [customUpload]="true" (onUpload)="subirImagen($event)" [multiple]="false"
+        accept="image/*">
+        <ng-template pTemplate="content">
+            <ul *ngIf="uploadedFiles.length">
+                <li *ngFor="let file of uploadedFiles">
+                    {{ file.name }} - {{ file.size }} bytes
+                </li>
+            </ul>
+        </ng-template>
+    </p-fileUpload>
+</p-dialog>

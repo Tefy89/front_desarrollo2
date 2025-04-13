@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ProductoService } from '../../services/producto.service';
 
+
 @Component({
   selector: 'app-producto',
   templateUrl: './producto.component.html',
@@ -10,7 +11,9 @@ export class ProductoComponent {
   private productoService = inject(ProductoService)
   loading: boolean = false;
   totalRecords!: number;
-  buscador: string = ''
+  buscador: string = '';
+  visible: boolean = false;
+  producto_id: number = -1;
 
   categorias: any = [
     { name: 'Ropa Dama', code: 'RD' },
@@ -53,6 +56,11 @@ export class ProductoComponent {
     } else if (this.buscador == "")
       this.listar()
   }
+
+  openDialogImagen(id: number) {
+    this.visible = true
+    this.producto_id = id
+  }
   openNew() {
 
   }
@@ -62,6 +70,20 @@ export class ProductoComponent {
   }
 
   deleteProduct(prod: any) {
+
+  }
+
+  uploadedFiles: any[] = [];
+  subirImagen(event: any) {
+    console.log(event.files[0])
+    let formData = new FormData();
+    formData.append("imagen", event.files[0])
+
+    this.productoService.actualizarImagen(formData, this.producto_id).subscribe(
+      (res: any) => {
+        console.log(res)
+      }
+    )
 
   }
 }

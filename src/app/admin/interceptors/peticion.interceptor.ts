@@ -9,7 +9,7 @@ export class peticionInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, handler: HttpHandler): Observable<HttpEvent<any>> {
     console.log('Request URL' + req.url)
 
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhdWwucGFlekBvdXRsb29rLmNvbSIsImlkIjoxLCJpYXQiOjE3NDQ1MTc5MzgsImV4cCI6MTc0NDUxODgxOH0.ME5qSb110cf-lQl0bolPzm2RdJuVSQbFdxjWZajONo4"
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhdWwucGFlekBvdXRsb29rLmNvbSIsImlkIjoxLCJpYXQiOjE3NDQ1MjA5MTcsImV4cCI6MTc0NDUyMTc5N30.Gyg779VaayH1yY6Eer5WrUsuv845RPePvwDrCrzf_lA"
 
     let peticion = req.clone({
       setHeaders: {

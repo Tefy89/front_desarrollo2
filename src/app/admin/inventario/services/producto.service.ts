@@ -13,4 +13,8 @@ export class ProductoService {
     return this.http.get(`${this.baseUrl}/producto/back?page=${page}&limit=${limit}&q=${q}`)
 
   }
+
+  actualizarImagen(formdata: any, id: number) {
+    return this.http.post(`${this.baseUrl}/producto/${id}/actualizar-img`, formdata)
+  }
 }
